@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect
 from postit_app.models.employee import Employee
 from postit_app.models.hr import Hr
-from postit_app.models.job import Job
+from postit_app.models.job import Jobs
 
 app = Flask(__name__)
 
