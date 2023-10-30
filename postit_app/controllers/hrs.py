@@ -7,13 +7,11 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 # HR Routes
-
 @app.route('/loginPageHr')
 def loginPageHr():
     if 'hr_id' in session:
         return redirect('/dashboardHr')
     return render_template('loginHr.html')
-
 
 @app.route('/loginHr', methods=['POST'])
 def loginHr():
@@ -45,8 +43,9 @@ def registerHr():
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'email': request.form['email'],
-        'password': bcrypt.generate_password_hash(request.form['password']),
         'about': request.form['about'],
+        'password': bcrypt.generate_password_hash(request.form['password']),
+        
     }
     Hr.create_hr(data)
     flash('HR successfully created', 'hrRegister')

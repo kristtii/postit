@@ -17,12 +17,6 @@ def loginPage():
         return redirect('/dashboard')
     return render_template('loginEmployee.html')
 
-@app.route('/registerPage')
-def registerPage():
-    if 'employee_id' in session:
-        return redirect('/dashboard')
-    return render_template('registerEmployee.html')
-
 @app.route('/login', methods=['POST'])
 def login():
     if 'employee_id' in session:
@@ -50,8 +44,8 @@ def register():
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'email': request.form['email'],
-        'password': bcrypt.generate_password_hash(request.form['password']),
         'about': request.form['about'],
+        'password': bcrypt.generate_password_hash(request.form['password']),
     }
     Employee.create_employee(data)
     flash('Employee successfully created', 'employeeRegister')
@@ -67,7 +61,7 @@ def dashboard():
     loggedEmployee = Employee.get_employee_by_id(loggedEmployeeData)
     if not loggedEmployee:
         return redirect('/logout')
-    return render_template('dashboardEmployee.html')
+    return render_template('dashboard.html')
 
 @app.route('/logout')
 def logout():

@@ -16,7 +16,7 @@
             <div class="row">
             </div>
             <div class="row">
-                <form action="/loginHr" class="form active" id="login">
+                <form action="/loginHr" class="form active" id="login" method="post">
                     <h2>Login</h2>
                     <label for="email">Email Address</label>
                     <div class="pass-reset" onclick="activeInput(this)">
@@ -32,7 +32,7 @@
                     <button class="btn btn-login"  type="submit" >Login</button>
                     <p>Don't have an account? <a onclick="changeToRegister()" id="changeToRegister">Sign up</a></p>
                 </form>
-                <form action="/registerHr" class="form" id="register">
+                <form action="/registerHr" class="form" id="register" method="post">
                     <h2>Register</h2>
                     <label for="first_name">First Name</label>
                     <div class="pass-reset" onclick="activeInput(this)">
@@ -56,7 +56,7 @@
                     </div>
                     <label for="re-password">Re-Password</label>
                     <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="password" class="password" name="re-password" id="re-password" placeholder="**********">
+                        <input type="password" class="password" name="confirmpassword" id="confirmpassword" placeholder="**********">
                     </div>
                     <button class="btn btn-login"  type="submit" >Register</button>
                     <p>Do you have an account? <a onclick="changeToLogin()" id="chnageToLogin">Sign in</a></p>

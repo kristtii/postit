@@ -34,7 +34,7 @@ class Employee:
 
     @classmethod
     def create_employee(cls, data):
-        query = "INSERT INTO Employee (first_name, last_name, email, password, about) VALUES ( %(first_name)s, %(last_name)s,%(email)s,%(password)s,%(about)s);"
+        query = "INSERT INTO Employee (first_name, last_name, email, about, password) VALUES ( %(first_name)s, %(last_name)s,%(email)s,%(about)s,%(password)s);"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
@@ -54,15 +54,15 @@ class Employee:
             flash("Invalid email address!", 'emailSignUp')
             is_valid = False
         if len(employee['first_name'])< 2:
-            flash('First name must be more than 2 characters', 'firstName')
+            flash('First name must be more than 2 characters', 'first_name')
             is_valid = False
         if len(employee['last_name'])< 2:
-            flash('Last name must be more than 2 characters', 'lastName')
+            flash('Last name must be more than 2 characters', 'last_name')
             is_valid = False
         if len(employee['password'])< 8:
             flash('Password must be more or equal to 8 characters', 'password')
             is_valid = False
-        if employee['confirmpassword'] != employee['password']:
+        if 'confirmpassword' in employee and employee['confirmpassword'] != employee['password']:
             flash('The passwords do not match',  'passwordConfirm')
             is_valid = False
         if len(employee['about'])< 8:
@@ -77,10 +77,10 @@ class Employee:
             flash("Invalid email address!", 'emailSignUp')
             is_valid = False
         if len(employee['first_name'])< 2:
-            flash('First name must be more than 2 characters', 'firstName')
+            flash('First name must be more than 2 characters', 'first_name')
             is_valid = False
         if len(employee['last_name'])< 2:
-            flash('Last name must be more than 2 characters', 'lastName')
+            flash('Last name must be more than 2 characters', 'last_name')
             is_valid = False
         if len(employee['about'])< 8:
             flash('About must be more or equal to 8 characters', 'about')

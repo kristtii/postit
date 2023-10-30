@@ -52,15 +52,15 @@ class Hr:
             flash("Invalid email address!", 'emailSignUp')
             is_valid = False
         if len(hr['first_name'])< 2:
-            flash('First name must be more than 2 characters', 'firstName')
+            flash('First name must be more than 2 characters', 'first_name')
             is_valid = False
         if len(hr['last_name'])< 2:
-            flash('Last name must be more than 2 characters', 'lastName')
+            flash('Last name must be more than 2 characters', 'last_name')
             is_valid = False
         if len(hr['password'])< 8:
             flash('Password must be more or equal to 8 characters', 'password')
             is_valid = False
-        if hr['confirmpassword'] != hr['password']:
+        if 'confirmpassword' in hr and hr['confirmpassword'] != hr['password']:
             flash('The passwords do not match',  'passwordConfirm')
             is_valid = False
         if len(hr['about'])< 8:
