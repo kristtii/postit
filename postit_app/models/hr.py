@@ -19,14 +19,14 @@ class Hr:
 
     @classmethod
     def get_hr_by_email(cls, data):
-        query = 'SELECT * FROM Hr WHERE email= %(email)s;'
+        query = 'SELECT * FROM hrs WHERE email= %(email)s;'
         results = connectToMySQL(cls.db_name).query_db(query, data)
         if results:
             return results[0]
         return False
     @classmethod
     def get_hr_by_id(cls, data):
-        query = 'SELECT * FROM Hr WHERE id= %(hr_id)s;'
+        query = 'SELECT * FROM hrs WHERE id= %(hr_id)s;'
         results = connectToMySQL(cls.db_name).query_db(query, data)
         if results:
             return results[0]
@@ -34,27 +34,27 @@ class Hr:
         
     @classmethod
     def updateVerificationCode(cls, data):
-        query = "UPDATE Hr SET verification_code = %(verification_code)s WHERE hr.id = %(hr_id)s;"
+        query = "UPDATE hrs SET verification_code = %(verification_code)s WHERE hr.id = %(hr_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod
     def activateAccount(cls, data):
-        query = "UPDATE Hr set is_verified = 1 WHERE hr.id = %(hr_id)s;"
+        query = "UPDATE hrs set is_verified = 1 WHERE hr.id = %(hr_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod
     def create_hr(cls, data):
-        query = "INSERT INTO Hr (first_name, last_name, company, email, password, about, verification_code) VALUES ( %(first_name)s, %(last_name)s, %(company)s,%(email)s,%(password)s,%(about)s, %(verification_code)s);"
+        query = "INSERT INTO hrs (first_name, last_name, company, email, password, about, verification_code) VALUES ( %(first_name)s, %(last_name)s, %(company)s,%(email)s,%(password)s,%(about)s, %(verification_code)s);"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
     def update_hr(cls, data):
-        query = "UPDATE Hr SET first_name = %(first_name)s, last_name = %(last_name)s, company=%(company)s, email= %(email)s, about=,%(about)s WHERE id = %(hr_id)s ;"
+        query = "UPDATE hrs SET first_name = %(first_name)s, last_name = %(last_name)s, company=%(company)s, email= %(email)s, about=,%(about)s WHERE id = %(hr_id)s ;"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
     def delete_hr(cls, data):
-        query = "DELETE FROM Hr WHERE id = %(hr_id)s;"
+        query = "DELETE FROM hrs WHERE id = %(hr_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data)
 
     @staticmethod
@@ -87,10 +87,10 @@ class Hr:
             flash("Invalid email address!", 'emailSignUp')
             is_valid = False
         if len(hr['first_name'])< 2:
-            flash('First name must be more than 2 characters', 'firstName')
+            flash('First name must be more than 2 characters', 'first_name')
             is_valid = False
         if len(hr['last_name'])< 2:
-            flash('Last name must be more than 2 characters', 'lastName')
+            flash('Last name must be more than 2 characters', 'last_name')
             is_valid = False
         if len(hr['about'])< 8:
             flash('About must be more or equal to 8 characters', 'about')

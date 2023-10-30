@@ -15,7 +15,15 @@ bcrypt = Bcrypt(app)
 @app.route('/')
 def index():
     return render_template('index.html')
-
+@app.route('/jobapply')
+def jobapply():
+    return render_template('jobdisplay.html')
+@app.route('/postajob')
+def postajob():
+    return render_template('postajob.html')
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 @app.route('/loginPage')
 def loginPage():
     if 'employee_id' in session:

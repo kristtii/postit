@@ -4,7 +4,7 @@
 
 body {
     background-color: #B0B6D0;
-    background-image: url('../img/login.jpg');
+    background-image: url('../images/login.jpg');
     background-size: cover; /* This property scales the image to cover the entire element */
     background-repeat: no-repeat; /* This property prevents the image from repeating */
     background-position: center center;

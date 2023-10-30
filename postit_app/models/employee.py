@@ -19,14 +19,14 @@ class Employee:
         
     @classmethod
     def get_employee_by_email(cls, data):
-        query = 'SELECT * FROM Employee WHERE email= %(email)s;'
+        query = 'SELECT * FROM employees WHERE email= %(email)s;'
         results = connectToMySQL(cls.db_name).query_db(query, data)
         if results:
             return results[0]
         return False
     @classmethod
     def get_employee_by_id(cls, data):
-        query = 'SELECT * FROM Employee WHERE id= %(employee_id)s;'
+        query = 'SELECT * FROM employees WHERE id= %(employee_id)s;'
         results = connectToMySQL(cls.db_name).query_db(query, data)
         if results:
             return results[0]
@@ -34,27 +34,27 @@ class Employee:
 
     @classmethod
     def create_employee(cls, data):
-        query = "INSERT INTO Employee (first_name, last_name, email, about, password, verification_code) VALUES ( %(first_name)s, %(last_name)s,%(email)s,%(about)s,%(password)s, %(verification_code)s);"
+        query = "INSERT INTO employees (first_name, last_name, email, about, password, verification_code) VALUES ( %(first_name)s, %(last_name)s,%(email)s,%(about)s,%(password)s, %(verification_code)s);"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
     def update_employee(cls, data):
-        query = "UPDATE Employee SET first_name = %(first_name)s, last_name = %(last_name)s, email= %(email)s, about=,%(about)s WHERE id = %(employee_id)s ;"
+        query = "UPDATE employees SET first_name = %(first_name)s, last_name = %(last_name)s, email= %(email)s, about=,%(about)s WHERE id = %(employee_id)s ;"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
     def updateVerificationCode(cls, data):
-        query = "UPDATE Employee SET verification_code = %(verification_code)s WHERE employee.id = %(employee_id)s;"
+        query = "UPDATE employees SET verification_code = %(verification_code)s WHERE employee.id = %(employee_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod
     def activateAccount(cls, data):
-        query = "UPDATE Employee set is_verified = 1 WHERE employee.id = %(employee_id)s;"
+        query = "UPDATE employees set is_verified = 1 WHERE employee.id = %(employee_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod
     def delete_employee(cls, data):
-        query = "DELETE FROM Employee WHERE id = %(employee_id)s;"
+        query = "DELETE FROM employees WHERE id = %(employee_id)s;"
         
     
     @staticmethod
