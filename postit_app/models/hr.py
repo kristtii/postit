@@ -8,6 +8,7 @@ class Hr:
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
+        self.company = data['company']
         self.email = data['email']
         self.about = data['about']
         self.is_verified = data['is_verified']
@@ -30,20 +31,31 @@ class Hr:
         if results:
             return results[0]
         return False
-
+        
+    @classmethod
+    def updateVerificationCode(cls, data):
+        query = "UPDATE Hr SET verification_code = %(verification_code)s WHERE hr.id = %(hr_id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data) 
+    
+    @classmethod
+    def activateAccount(cls, data):
+        query = "UPDATE Hr set is_verified = 1 WHERE hr.id = %(hr_id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data) 
+    
     @classmethod
     def create_hr(cls, data):
-        query = "INSERT INTO Hr (first_name, last_name, email, password, about) VALUES ( %(first_name)s, %(last_name)s,%(email)s,%(password)s,%(about)s);"
+        query = "INSERT INTO Hr (first_name, last_name, company, email, password, about, verification_code) VALUES ( %(first_name)s, %(last_name)s, %(company)s,%(email)s,%(password)s,%(about)s, %(verification_code)s);"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
     def update_hr(cls, data):
-        query = "UPDATE Hr SET first_name = %(first_name)s, last_name = %(last_name)s, email= %(email)s, about=,%(about)s WHERE id = %(hr_id)s ;"
+        query = "UPDATE Hr SET first_name = %(first_name)s, last_name = %(last_name)s, company=%(company)s, email= %(email)s, about=,%(about)s WHERE id = %(hr_id)s ;"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
     def delete_hr(cls, data):
         query = "DELETE FROM Hr WHERE id = %(hr_id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data)
 
     @staticmethod
     def validate_hr(hr):
