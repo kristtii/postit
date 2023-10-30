@@ -32,7 +32,7 @@
                     <div class="pass-reset remember-box">
                         <input type="checkbox" name="remember" class="remember" id="remember"><span class="remember-text">Rememeber Password</span>
                     </div>
-                    <button class="btn btn-login">Login</button>
+                    <button class="btn btn-login"  type="submit">Login</button>
                     <p>Don't have an account? <a onclick="changeToRegister()" id="changeToRegister">Sign up</a></p>
                 </form>
                 <form action="/register" class="form" id="register">
@@ -45,9 +45,13 @@
                     <div class="pass-reset" onclick="activeInput(this)">
                     <input type="text" name="last_name" class="last_name" id="last_name" placeholder="Last Name">
                     </div>
+                    <label for="Email">Email</label>
+                    <div class="pass-reset" onclick="activeInput(this)">
+                        <input type="email" name="email" class="email" id="email" placeholder="email@abcd.xyz">
+                    </div>
                     <label for="about">About</label>
                     <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="tex" name="about" class="about" id="about" placeholder="About">
+                        <input type="text" name="about" class="about" id="about" placeholder="About">
                     </div>
                     <label for="password">Password</label>
                     <div class="pass-reset" onclick="activeInput(this)">
@@ -57,7 +61,7 @@
                     <div class="pass-reset" onclick="activeInput(this)">
                         <input type="password" class="password" name="re-password" id="re-password" placeholder="**********">
                     </div>
-                    <button class="btn btn-login">Register</button>
+                    <button class="btn btn-login"  type="submit">Register</button>
                     <p>Do you have an account? <a onclick="changeToLogin()" id="chnageToLogin">Sign in</a></p>
 
                 </form>

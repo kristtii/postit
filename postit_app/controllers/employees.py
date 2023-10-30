@@ -1,69 +1,66 @@
-from flask import render_template, redirect,session,request,flash
 from postit_app import app
-
+from flask import render_template, redirect, session, request, flash
 from postit_app.models.employee import Employee
-
+from postit_app.models.hr import Hr
 from flask_bcrypt import Bcrypt
+
 bcrypt = Bcrypt(app)
 
-
-@app.route('/employee')
+# Employee Routes
+@app.route('/')
 def index():
-    if 'employee_id' in session:
-        return redirect('/dashboard')
-    return redirect('/logout')
+    return render_template('index.html')
 
 @app.route('/loginPage')
 def loginPage():
     if 'employee_id' in session:
-        return redirect('/')
+        return redirect('/dashboard')
     return render_template('loginEmployee.html')
 
 @app.route('/registerPage')
 def registerPage():
     if 'employee_id' in session:
-        return redirect('/')
-    return render_template('loginEmployee.html')
+        return redirect('/dashboard')
+    return render_template('registerEmployee.html')
 
-@app.route('/login', methods = ['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     if 'employee_id' in session:
-        return redirect('/')
+        return redirect('/dashboard')
     employee = Employee.get_employee_by_email(request.form)
     if not employee:
         flash('This email does not exist.', 'emailLogin')
-        return redirect(request.referrer)
+        return redirect('/loginPage')
     if not bcrypt.check_password_hash(employee['password'], request.form['password']):
         flash('Your password is wrong!', 'passwordLogin')
-        return redirect(request.referrer)
+        return redirect('/loginPage')
     session['employee_id'] = employee['id']
-    return redirect('/')
-    
-@app.route('/register', methods= ['POST'])
+    return redirect('/dashboard')
+
+@app.route('/register', methods=['POST'])
 def register():
     if 'employee_id' in session:
-        return redirect('/')
+        return redirect('/dashboard')
     
     if Employee.get_employee_by_email(request.form):
         flash('This email already exists. Try another one.', 'emailSignUp')
-        return redirect(request.referrer)
+        return redirect('/registerPage')
+    
     data = {
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'email': request.form['email'],
         'password': bcrypt.generate_password_hash(request.form['password']),
-        'confirmpassword': request.form['confirmpassword'],
         'about': request.form['about'],
     }
     Employee.create_employee(data)
-    flash('Employee succefully created', 'employeeRegister')
-    return redirect('/')
-
+    flash('Employee successfully created', 'employeeRegister')
+    return redirect('/dashboard')
 
 @app.route('/dashboard')
 def dashboard():
     if 'employee_id' not in session:
-        return redirect('/')
+        return redirect('/loginPage')
     loggedEmployeeData = {
         'employee_id': session['employee_id']
     } 
@@ -76,3 +73,4 @@ def dashboard():
 def logout():
     session.clear()
     return redirect('/loginPage')
+
