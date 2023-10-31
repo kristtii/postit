@@ -54,7 +54,7 @@ def viewjob(id):
     data = {
         'hr_id': session['hr_id'],
         'employee_id': session['employee_id'],
-        'tvshow_id': id
+        'job_id': id
     }
     loggedHr = Hr.get_hr_by_id(data)
     loggedUser = Employee.get_employee_by_id(data)
