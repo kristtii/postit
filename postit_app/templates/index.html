@@ -5,19 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>postIt.</title>
-     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}"> -->
+    <title>Login and Register page</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/firstpage.css') }}">
 
 </head>
 
 <body>
-    <h1>Welcome to postIt.</h1>
-    <p>Choose your login type:</p>
+    <div class="container flex-column">
+        <img class="img "/static/images/postit-logo.png alt="">
+        <div class="color">
+            <ul class="list d_flex">
+                <li><a class="btn btn-login" href="/loginPage">Login as Employee</a></li>
+                <li><a class="btn btn-login" href="/loginPageHr">Login as HR</a></li>
+            </ul>
+        </div>
+    </div>
 
-    <ul>
-        <li><a href="/loginPage">Login as Employee</a></li>
-        <li><a href="/loginPageHr">Login as HR</a></li>
-    </ul>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 
 </html>
