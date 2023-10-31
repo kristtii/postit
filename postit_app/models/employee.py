@@ -44,12 +44,12 @@ class Employee:
     
     @classmethod
     def updateVerificationCode(cls, data):
-        query = "UPDATE employees SET verification_code = %(verification_code)s WHERE employee.id = %(employee_id)s;"
+        query = "UPDATE employees SET verification_code = %(verification_code)s WHERE employees.id = %(employee_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod
     def activateAccount(cls, data):
-        query = "UPDATE employees set is_verified = 1 WHERE employee.id = %(employee_id)s;"
+        query = "UPDATE employees set is_verified = 1 WHERE employees.id = %(employee_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod

@@ -34,12 +34,12 @@ class Hr:
         
     @classmethod
     def updateVerificationCode(cls, data):
-        query = "UPDATE hrs SET verification_code = %(verification_code)s WHERE hr.id = %(hr_id)s;"
+        query = "UPDATE hrs SET verification_code = %(verification_code)s WHERE hrs.id = %(hr_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod
     def activateAccount(cls, data):
-        query = "UPDATE hrs set is_verified = 1 WHERE hr.id = %(hr_id)s;"
+        query = "UPDATE hrs set is_verified = 1 WHERE hrs.id = %(hr_id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data) 
     
     @classmethod

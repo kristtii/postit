@@ -78,7 +78,8 @@ def registerHr():
     server.quit()
     
     hr = Hr.get_hr_by_email(data)
-    
+    print(hr)
+    print(')))))))))))))))))))))))))')
     session['hr_id'] = hr['id']
 
     return redirect('/verify/email/hr')
@@ -91,6 +92,7 @@ def verifyEmailHr():
         'hr_id': session['hr_id']
     }
     hr = Hr.get_hr_by_id(data)
+
     if hr['is_verified'] == 1:
         return redirect('/dashboard')
     return render_template('verifyHr.html', loggedHr = hr)
