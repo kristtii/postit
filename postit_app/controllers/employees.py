@@ -16,11 +16,6 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('index.html')
 
-@app.route('/jobdisplay')
-def jobapply():
-    return render_template('jobdisplay.html')
-
-
 @app.route('/contact')
 def contact():
     return render_template('contact.html')

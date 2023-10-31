@@ -42,7 +42,23 @@ def createPost():
         'deadline': request.form['deadline'],
         'job_post_image': request.form['job_post_image'],
         'company_logo': request.form['company_logo'],
-        'hr_id': session['hr_id']
     }   
     Job.create_job(data)
     return redirect('/')
+
+
+@app.route('/job/<int:id>')
+def viewjob(id):
+    # if 'hr_id'or 'employee_id' not in session:
+    #     return redirect('/')
+    data = {
+        'hr_id': session['hr_id'],
+        'employee_id': session['employee_id'],
+        'tvshow_id': id
+    }
+    loggedHr = Hr.get_hr_by_id(data)
+    loggedUser = Employee.get_employee_by_id(data)
+    
+    job = Job.get_job_by_id(data)
+    jobcreator=Job.get_job_creator(data)
+    return render_template('jobdisplay.html', job = job, loggedHr = loggedHr, jobcreator=jobcreator, loggedUser =loggedUser )
