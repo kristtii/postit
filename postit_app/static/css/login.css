@@ -5,14 +5,19 @@
 body {
     background-color: #B0B6D0;
     background-image: url('../images/login.jpg');
-    background-size: cover; /* This property scales the image to cover the entire element */
-    background-repeat: no-repeat; /* This property prevents the image from repeating */
+    background-size: cover;
+    /* This property scales the image to cover the entire element */
+    background-repeat: no-repeat;
+    /* This property prevents the image from repeating */
     background-position: center center;
     display: flex;
-    justify-content: center; /* Horizontally centers the content */
-    align-items: center; /* Vertically centers the content */
-    height: 100vh; /* Make the body cover the entire viewport height */
-    margin: 0; 
+    justify-content: center;
+    /* Horizontally centers the content */
+    align-items: center;
+    /* Vertically centers the content */
+    height: 100vh;
+    /* Make the body cover the entire viewport height */
+    margin: 0;
 }
 
 .container {
@@ -39,17 +44,20 @@ body {
     justify-items: center;
     width: 100%;
     height: auto;
-    border-right: 10px solid white;
     gap: 10px;
+}
+
+.row img {
+    width: 230px;
+    margin-left: 20px;
+    animation: show 1s;
 }
 
 h2 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin-bottom: 50px;
     font-size: 30px;
     font-weight: 100;
-    text-decoration: overline solid #0B1CD5;
-    padding: 10px;
+    text-decoration: overline solid #5ebc67;
 }
 
 
@@ -64,7 +72,6 @@ h2 {
     transform: scale(1);
     opacity: 1;
     flex-direction: column;
-    gap: 10px;
     animation: show 1s;
 }
 
@@ -81,9 +88,9 @@ h2 {
 }
 
 input {
-    padding: 10px;
+    padding: 5px;
     outline: none;
-    border: 1px solid #5E5763;
+    border: none;
     border-radius: 5px;
     background-color: #FBFBFC;
 }
@@ -91,13 +98,11 @@ input {
 .password,
 .email {
     border: none;
-    padding: 20px;
-    width: 60%;
+    padding: 5px;
+    width: 100%;
+
 }
 
-.email {
-    width: 100%;
-}
 
 .pass-reset {
     border: 1px solid #B0B6D0;
@@ -142,13 +147,13 @@ input {
 }
 
 .btn-login {
-    background-color: #4054D2;
+    background-color: #5ebc67;
     color: #ffffff;
     border-radius: 9px;
 }
 
 .btn-login:hover {
-    background-color: #0B1CD5;
+    background-color: #4ea256;
 }
 
 .btn-gogle-auth {
@@ -198,11 +203,12 @@ a:hover {
 
 
 
-@media screen and (max-width: 810px){
+@media screen and (max-width: 810px) {
     body {
         padding: 0;
         margin: 0;
     }
+
     .container {
         padding: 0;
         margin: 0;
@@ -215,10 +221,10 @@ a:hover {
         position: absolute;
         height: 100%;
     }
-    
+
     .img {
         display: none;
-        
+
     }
 
     .row {
@@ -227,6 +233,7 @@ a:hover {
         width: 100%;
         border: 0;
     }
+
     .form {
         width: 100%;
         flex-direction: column;
@@ -235,6 +242,7 @@ a:hover {
         justify-content: center;
         align-content: center;
     }
+
     .pass-reset {
         flex-direction: column;
         align-items: center;
@@ -243,23 +251,29 @@ a:hover {
         align-content: center;
         border: none;
     }
+
     .remember-box {
         flex-direction: row;
     }
-    .email, .password {
+
+    .email,
+    .password {
         width: 100%;
         border: 1px solid #5E5763;
 
         margin-bottom: 10px;
     }
+
     .or {
         width: 100%;
     }
+
     .or::before {
         content: '';
         padding: 0;
         margin: 0;
     }
+
     .or::after {
         content: '';
         padding: 0;
