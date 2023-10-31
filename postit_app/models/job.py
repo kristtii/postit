@@ -32,6 +32,7 @@ class Job:
         if results:
             return results[0]
         return False
+    
     @classmethod
     def get_job_creator(cls, data):
         query="SELECT jobs.id AS job_id, jobs.hr_id, hrs.id AS hr_id, hrs.first_name as first_name, hrs.last_name as last_name FROM jobs LEFT JOIN hrs ON jobs.hr_id = hrs.id WHERE jobs.id= %(job_id)s;"
@@ -42,9 +43,24 @@ class Job:
     
     @classmethod
     def create_job(cls, data):
-        query = "INSERT INTO jobs (title, description, salary, responsibilities, education_experience, benefits, employement_status, experience, deadline, job_post_image, company_logo, hr_id) VALUES ( %(title)s, %(description)s, %(salary)s, %(responsibilities)s, %(education_experience)s, %(benefits)s, %(employement_status)s, %(experience)s, %(deadline)s, %(job_post_image)s, %(company_logo)s , %(hr_id)s);"
+        query = "INSERT INTO jobs (title, description, salary, responsibilities, education_experience, benefits, employment_status, experience, deadline, job_post_image, company_logo, hr_id) VALUES ( %(title)s, %(description)s, %(salary)s, %(responsibilities)s, %(education_experience)s, %(benefits)s, %(employment_status)s, %(experience)s, %(deadline)s, %(job_post_image)s, %(company_logo)s , %(hr_id)s);"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
+    @staticmethod
+    def validateImage(data):
+        is_valid = True
+        if len(data) < 1:
+            flash('Please select at least one image', 'job_post_image')
+            is_valid = False 
+        return is_valid
+    
+    @staticmethod
+    def validateImageLogo(data):
+        is_valid = True
+        if len(data) < 1:
+            flash('Please select at least one image', 'company_logo')
+            is_valid = False 
+        return is_valid
     
     @staticmethod
     def validate_job(hr):
