@@ -90,16 +90,25 @@ def create_job():
 
 @app.route('/job/<int:id>')
 def viewjob(id):
-    # if 'hr_id'or 'employee_id' not in session:
-    #     return redirect('/')
-    data = {
-        'hr_id': session['hr_id'],
-        'employee_id': session['employee_id'],
-        'job_id': id
-    }
-    loggedHr = Hr.get_hr_by_id(data)
-    loggedUser = Employee.get_employee_by_id(data)
-    
-    job = Job.get_job_by_id(data)
-    jobcreator=Job.get_job_creator(data)
-    return render_template('jobdisplay.html', job = job, loggedHr = loggedHr, jobcreator=jobcreator, loggedUser =loggedUser )
+    if 'hr_id' in session:
+        data = {
+            'hr_id': session.get('hr_id'),
+            'job_id': id
+        }
+        loggedHr = Hr.get_hr_by_id(data)
+        job = Job.get_job_by_id(data)
+        jobcreator = Job.get_job_creator(data)
+        return render_template('jobdisplay.html', job=job, loggedHr=loggedHr, jobcreator=jobcreator)
+
+    elif 'employee_id' in session:
+        data = {
+            'employee_id': session.get('employee_id'),
+            'job_id': id
+        }
+        loggedUser = Employee.get_employee_by_id(data)
+        job = Job.get_job_by_id(data)
+        jobcreator = Job.get_job_creator(data)
+        return render_template('jobdisplay.html', job=job, loggedUser=loggedUser, jobcreator=jobcreator)
+
+    else:
+        return redirect('/')

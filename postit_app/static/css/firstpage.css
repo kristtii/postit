@@ -1,35 +1,34 @@
-.img{
-    width: 350px;
-    height: 150px;
+.img {
+    width: 230px;
+    height: auto;
     border-radius: 10px;
-    margin: 50px;
-    padding-bottom: 200px;
-
-    
+    margin: 20px;
 }
 
-
-.color{
-    color:#72c17a;
-
-}
-.btn{
-    border-radius: solid 3px #72c17a ;
+.color {
+    color: #72c17a;
 
 }
-.d_flex{
-    display:flex;
+
+.btn {
+    border-radius: solid 3px #72c17a;
+
 }
 
-.list{
+.d_flex {
+    display: flex;
+}
+
+.list {
     list-style: none;
+    padding: 0;
 }
 
-.flex-column{
+.flex-column {
     display: flex;
     flex-direction: column;
 }
-.btn-login{
-    margin: 120px;
 
+.btn-login {
+    margin: 10px;
 }
