@@ -16,6 +16,10 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('index.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 @app.route('/loginPage')
 def loginPage():
     if 'employee_id' in session:
@@ -161,5 +165,5 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect('/loginPage')
+    return redirect('/')
 

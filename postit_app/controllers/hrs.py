@@ -1,7 +1,7 @@
 from postit_app import app
 from flask import render_template, redirect, session, request, flash
 from postit_app.models.hr import Hr
-from postit_app.models.hr import Hr
+
 from flask_bcrypt import Bcrypt
 import random
 import math
@@ -12,6 +12,8 @@ from .env import PASSWORD
 bcrypt = Bcrypt(app)
 
 # HR Routes
+
+
 @app.route('/loginPageHr')
 def loginPageHr():
     if 'hr_id' in session:
@@ -77,7 +79,6 @@ def registerHr():
     server.quit()
     
     hr = Hr.get_hr_by_email(data)
-    
     session['hr_id'] = hr['id']
 
     return redirect('/verify/email/hr')
@@ -90,6 +91,7 @@ def verifyEmailHr():
         'hr_id': session['hr_id']
     }
     hr = Hr.get_hr_by_id(data)
+
     if hr['is_verified'] == 1:
         return redirect('/dashboard')
     return render_template('verifyHr.html', loggedHr = hr)
@@ -141,7 +143,7 @@ def activateAccountHr():
         return redirect(request.referrer)
     
     Hr.activateAccount(data)
-    return redirect('/dashboard')
+    return redirect('/dashboardHr')
 
 
 @app.route('/dashboardHr')
