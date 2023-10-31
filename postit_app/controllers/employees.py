@@ -16,13 +16,10 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('index.html')
 
-@app.route('/jobapply')
+@app.route('/jobdisplay')
 def jobapply():
     return render_template('jobdisplay.html')
 
-@app.route('/postajob')
-def postajob():
-    return render_template('postajob.html')
 
 @app.route('/contact')
 def contact():
@@ -173,5 +170,5 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect('/loginPage')
+    return redirect('/')
 

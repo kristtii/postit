@@ -13,6 +13,7 @@ bcrypt = Bcrypt(app)
 
 # HR Routes
 
+
 @app.route('/loginPageHr')
 def loginPageHr():
     if 'hr_id' in session:
@@ -78,8 +79,6 @@ def registerHr():
     server.quit()
     
     hr = Hr.get_hr_by_email(data)
-    print(hr)
-    print(')))))))))))))))))))))))))')
     session['hr_id'] = hr['id']
 
     return redirect('/verify/email/hr')
@@ -144,7 +143,7 @@ def activateAccountHr():
         return redirect(request.referrer)
     
     Hr.activateAccount(data)
-    return redirect('/dashboard')
+    return redirect('/dashboardHr')
 
 
 @app.route('/dashboardHr')
