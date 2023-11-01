@@ -48,7 +48,7 @@ def register():
     
     if Employee.get_employee_by_email(request.form):
         flash('This email already exists. Try another one.', 'emailSignUp')
-        return redirect('/registerPage')
+        return redirect('/loginPage')
     string = '0123456789'
     vCode = ""
     length = len(string)
@@ -155,18 +155,32 @@ def activateAccount():
 def dashboard():
     if 'employee_id' not in session:
         return redirect('/loginPage')
+    if 'hr_id' in session:
+        return redirect('/logout')
     loggedEmployeeData = {
         'employee_id': session['employee_id']
     } 
     loggedEmployee = Employee.get_employee_by_id(loggedEmployeeData)
     job = Job.get_all_jobs()
     jobposted=Job.count_jobs()
-    print(jobposted)
     
     if not loggedEmployee:
         return redirect('/logout')
   
     return render_template('dashboard.html',job=job, jobposted=jobposted)
+
+@app.route('/results', methods=['GET', 'POST'])
+def search():
+    if 'employee_id' not in session:
+        return redirect('/')
+
+    search_query = request.args.get('searchfield', default='')
+
+    jobs = []
+
+    if search_query:
+        jobs = Job.search(search_query)
+    return render_template('results.html', jobs=jobs)
 
 @app.route('/logout')
 def logout():

@@ -51,10 +51,30 @@ class Job:
         return jobs
     
     @classmethod
+    def search(cls, search_query):
+
+        query = f"""
+            SELECT * FROM jobs where jobs.title LIKE '{search_query}%'
+        """
+
+        try:
+            results = connectToMySQL(cls.db_name).query_db(query)
+
+            jobs = []
+            if results:
+                for job in results:
+                    jobs.append(job)
+            return jobs
+        except Exception as e:
+            print("An error occurred:", str(e))
+            return []
+    
+    @classmethod
     def get_hr_jobs_by_id(cls, data):
         query = 'SELECT * FROM jobs WHERE hr_id= %(hr_id)s;'
         results = connectToMySQL(cls.db_name).query_db(query, data)
         return results 
+    
     @classmethod
     def get_job_creator(cls, data):
         query="SELECT jobs.id AS job_id, jobs.hr_id, hrs.id AS hr_id, hrs.first_name as first_name, hrs.last_name as last_name, company,email FROM jobs LEFT JOIN hrs ON jobs.hr_id = hrs.id WHERE jobs.id= %(job_id)s;"

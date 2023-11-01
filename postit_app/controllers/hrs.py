@@ -150,6 +150,9 @@ def activateAccountHr():
 def dashboardHr():
     if 'hr_id' not in session:
         return redirect('/loginPageHr')
+    
+    if 'employee_id' in session:
+        return redirect('/logout')
     loggedHrData = {
         'hr_id': session['hr_id']
     } 

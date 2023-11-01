@@ -103,6 +103,10 @@ input {
 
 }
 
+.card-a {
+    text-align: center;
+    width: 720px;
+}
 
 .pass-reset {
     border: 1px solid #B0B6D0;

@@ -8,69 +8,14 @@
     <title>Login and Register page</title>
  
      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-    </head>
-    
-    <body>
-        <div class="container">
-            <div class="row">
-                <img src="../static/images/postit-logo.png" alt="postIt.">
-            </div>
-            <div class="row">
-                <form action="/loginHr" class="form active" id="login" method="post">
-                    <h2>Login</h2>
-                    <label for="email">Email Address</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="email" name="email" class="email" id="emailInput" placeholder="name@mail.com">
-                    </div>
-                    <label for="password">Password</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="password" class="password" name="password" id="password" placeholder="**********">
-                    </div>
-                    <div class="pass-reset remember-box">
-                        <input type="checkbox" name="remember" class="remember" id="remember"><span class="remember-text">Rememeber Password</span>
-                    </div>
-                    <button class="btn btn-login"  type="submit" >Login</button>
-                    <p>Don't have an account? <a onclick="changeToRegister()" id="changeToRegister">Sign up</a></p>
-                </form>
-                <form action="/registerHr" class="form" id="register" method="post">
-                    <h2>Register</h2>
-                    <label for="first_name">First Name</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="text" name="first_name" class="first_name" id="first_name" placeholder="First Name">
-                    </div>
-                    <label for="last_name">Last Name</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                    <input type="text" name="last_name" class="last_name" id="last_name" placeholder="Last Name">
-                    </div>
-                    <label for="Email">Email</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="email" name="email" class="email" id="email" placeholder="email@abcd.xyz">
-                    </div>
-                    <label for="company">Company</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="text" name="company" class="company" placeholder="Company Name">
-                    </div>
-                    <label for="about">About</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="tex" name="about" class="about" id="about" placeholder="About">
-                    </div>
-                    <label for="password">Password</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="password" class="password" name="password" id="password" placeholder="**********">
-                    </div>
-                    <label for="re-password">Re-Password</label>
-                    <div class="pass-reset" onclick="activeInput(this)">
-                        <input type="password" class="password" name="confirmpassword" id="confirmpassword" placeholder="**********">
-                    </div>
-                    <button class="btn btn-login"  type="submit" >Register</button>
-                    <p>Do you have an account? <a onclick="changeToLogin()" id="chnageToLogin">Sign in</a></p>
-
-
 </head>
 
 <body>
     <div class="container">
         <div class="row">
+            <div class="row">
+                <img src="../static/images/postit-logo.png" alt="postIt.">
+            </div>
         </div>
         <div class="row">
             <form action="/loginHr" class="form active" id="login" method="post">
