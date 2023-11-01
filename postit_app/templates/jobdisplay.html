@@ -88,24 +88,28 @@
           <div class="col-lg-8 mb-4 mb-lg-0">
             <div class="d-flex align-items-center">
               <div class="border p-2 d-inline-block mr-3 rounded">
-                <img src="{{ }}" alt="Image" class="img-fluid mb-0">
+                <img src="../../static/job_images_logo/{{job.company_logo}}" alt="Image" class="img-fluid mb-0" width="200" height="200">
               </div>
               <div>
                 <h2>{{job.title}}</h2>
                 <div>
                   <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{jobcreator.company}}</span>
-                  <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">job.employement_status</span></span>
-                </div>
+                  <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">
+                    {% if job.employment_status == "part_time" %}
+                      Part-Time
+                    {% else %}
+                      Full-Time
+                    {% endif %}
+                  </span></span>
+                   </div>
               </div>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="row">
+             
               <div class="col-6">
-                <a href="/favourite" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
-              </div>
-              <div class="col-6">
-                <a href="/contact" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                <a href="mailto:{{jobcreator.email}}" class="btn btn-block btn-primary btn-md">Apply Now</a>
               </div>
             </div>
           </div>
@@ -113,7 +117,7 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="mb-5">
-              <figure class="mb-5"><img src="{{}}" alt="Image" class="img-fluid rounded"></figure>
+              <figure class="mb-5"><img src="../../static/job_images/{{job.job_post_image}}" alt="Image" class="img-fluid rounded" width="700" height="300"></figure>
               <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Job Description</h3>
               <p>{{job.description}}</p>
             </div>
@@ -140,11 +144,9 @@
             </div>
 
             <div class="row mb-5">
+          
               <div class="col-6">
-                <a href="/favourite" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
-              </div>
-              <div class="col-6">
-                <a href="/contact" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                <a href="mailto:{{jobcreator.email}}" class="btn btn-block btn-primary btn-md">Apply Now</a>
               </div>
             </div>
 
@@ -154,9 +156,15 @@
               <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
               <ul class="list-unstyled pl-3 mb-0">
                 <li class="mb-2"><strong class="text-black">Published on:</strong>{{job.created_at}}</li>
-                <li class="mb-2"><strong class="text-black">Employment Status:</strong> {{job.employement_status}}</li>
-                <li class="mb-2"><strong class="text-black">Experience:</strong> {{job.experience}} <p>year(s)</p></li>
-                <li class="mb-2"><strong class="text-black">Salary:</strong><p>$</p> {{job.salary}}</li>
+                {% if job.employment_status == "part_time" %}
+                {% set employment_status = "Part-Time" %}
+                {% else %}
+                {% set employment_status = "Full-Time" %}
+                {% endif %}
+                <li class="mb-2"><strong class="text-black">Employment Status:</strong> {{ employment_status }}</li>
+                <li class="mb-2"><strong class="text-black">Experience:</strong> {{ job.experience }} <p class="d-inline">year(s)</p></li>
+                <li class="mb-2"><strong class="text-black">Salary:</strong><p class="d-inline">$ {{job.salary}}</p></li>
+
                 <li class="mb-2"><strong class="text-black">Application Deadline:</strong> {{job.deadline}}</li>
               </ul>
             </div>
@@ -178,62 +186,7 @@
 
   
 
-    <section class="bg-light pt-5 testimony-full">
-        
-        <div class="owl-carousel single-carousel">
 
-        
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 align-self-center text-center text-lg-left">
-                <blockquote>
-                  <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
-                  <p><cite> &mdash; Corey Woods, @Dribbble</cite></p>
-                </blockquote>
-              </div>
-              <div class="col-lg-6 align-self-end text-center text-lg-right">
-                <img src="{{ url_for('static', filename='images/person_transparent_2.png') }}" alt="Image" class="img-fluid mb-0">
-
-              </div>
-            </div>
-          </div>
-
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 align-self-center text-center text-lg-left">
-                <blockquote>
-                  <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
-                  <p><cite> &mdash; Chris Peters, @Google</cite></p>
-                </blockquote>
-              </div>
-              <div class="col-lg-6 align-self-end text-center text-lg-right">
-                <img src="{{ url_for('static', filename='images/person_transparent.png') }}" alt="Image" class="img-fluid mb-0">
-
-              </div>
-            </div>
-          </div>
-
-      </div>
-
-    </section>
-
-    <section class="pt-5 bg-image overlay-primary fixed overlay" style="background-image: url('images/hero_1.jpg');">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 align-self-center text-center text-md-left mb-5 mb-md-0">
-            <h2 class="text-white">Get The Mobile Apps</h2>
-            <p class="mb-5 lead text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci impedit.</p>
-            <p class="mb-0">
-              <a href="#" class="btn btn-dark btn-md px-4 border-width-2"><span class="icon-apple mr-3"></span>App Store</a>
-              <a href="#" class="btn btn-dark btn-md px-4 border-width-2"><span class="icon-android mr-3"></span>Play Store</a>
-            </p>
-          </div>
-          <div class="col-md-6 ml-auto align-self-end">
-            <img src="images/apps.png" alt="Image" class="img-fluid">
-          </div>
-        </div>
-      </div>
-    </section>
     
     <footer class="site-footer">
 
@@ -284,10 +237,7 @@
 
         <div class="row text-center">
           <div class="col-12">
-            <p class="copyright"><small>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small></p>
+            <p class="copyright"><small></p>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 from postit_app import app
 from flask import render_template, redirect, session, request, flash
 from postit_app.models.hr import Hr
-
+from postit_app.models.job import Job
 from flask_bcrypt import Bcrypt
 import random
 import math
@@ -154,9 +154,10 @@ def dashboardHr():
         'hr_id': session['hr_id']
     } 
     loggedHr = Hr.get_hr_by_id(loggedHrData)
+    jobs=Job.get_hr_jobs_by_id(loggedHrData)
     if not loggedHr:
         return redirect('/logoutHr')
-    return render_template('dashboardHr.html')
+    return render_template('dashboardHr.html', jobs=jobs)
 
 @app.route('/logoutHr')
 def logoutHr():

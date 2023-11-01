@@ -7,6 +7,7 @@ from .env import ADMINEMAIL
 from .env import PASSWORD
 from postit_app.models.employee import Employee
 from postit_app.models.hr import Hr
+from postit_app.models.job import Job
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
@@ -158,9 +159,14 @@ def dashboard():
         'employee_id': session['employee_id']
     } 
     loggedEmployee = Employee.get_employee_by_id(loggedEmployeeData)
+    job = Job.get_all_jobs()
+    jobposted=Job.count_jobs()
+    print(jobposted)
+    
     if not loggedEmployee:
         return redirect('/logout')
-    return render_template('dashboard.html')
+  
+    return render_template('dashboard.html',job=job, jobposted=jobposted)
 
 @app.route('/logout')
 def logout():

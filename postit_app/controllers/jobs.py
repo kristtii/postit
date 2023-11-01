@@ -85,7 +85,7 @@ def create_job():
     # Create the job using your Job class
     Job.create_job(data)
 
-    return redirect('/')
+    return redirect('/dashboardHr')
 
 
 @app.route('/job/<int:id>')
@@ -112,3 +112,16 @@ def viewjob(id):
 
     else:
         return redirect('/')
+
+# @app.route('/job/<int:id>')
+# def viewtvshow(id):
+#     data = {
+#         'hr_id': session['hr_id'],
+#         'job_id': id
+#     }
+#     loggedHr = Hr.get_hr_by_id(data)
+#     job = Job.get_job_by_id(data)
+#     jobcreator = Job.get_job_creator(data)
+#     print(job, "we are at here")
+#     return render_template('jobdisplay.html', job=job, loggedHr=loggedHr, jobcreator=jobcreator)
+

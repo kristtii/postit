@@ -11,7 +11,7 @@ class Job:
         self.responsibilities = data['responsibilities']
         self.education_experience = data['education_experience']
         self.benefits = data['benefits']
-        self.employement_status = data['employement_status']
+        self.employment_status = data['employment_status']
         self.experience = data['experience']
         self.deadline = data['deadline']
         self.job_post_image = data['job_post_image']
@@ -24,6 +24,12 @@ class Job:
     @classmethod
     def delete_job(cls, data):
         query = "DELETE FROM Jobs WHERE id = %(job_id)s;"
+      
+    @classmethod
+    def count_jobs(cls):
+        query = 'SELECT COUNT(*) FROM jobs;'
+        results = connectToMySQL(cls.db_name).query_db(query)
+        return results[0]['COUNT(*)']
     
     @classmethod
     def get_job_by_id(cls, data):
@@ -32,10 +38,26 @@ class Job:
         if results:
             return results[0]
         return False
+    @classmethod
+    def get_all_jobs(cls):
+        query = 'SELECT * FROM jobs;'
+        results = connectToMySQL(cls.db_name).query_db(query)
+        jobs = []
+        if results:
+            for job in results:
+                job = Job(job)
+                jobs.append(job)
+            return jobs
+        return jobs
     
     @classmethod
+    def get_hr_jobs_by_id(cls, data):
+        query = 'SELECT * FROM jobs WHERE hr_id= %(hr_id)s;'
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        return results 
+    @classmethod
     def get_job_creator(cls, data):
-        query="SELECT jobs.id AS job_id, jobs.hr_id, hrs.id AS hr_id, hrs.first_name as first_name, hrs.last_name as last_name FROM jobs LEFT JOIN hrs ON jobs.hr_id = hrs.id WHERE jobs.id= %(job_id)s;"
+        query="SELECT jobs.id AS job_id, jobs.hr_id, hrs.id AS hr_id, hrs.first_name as first_name, hrs.last_name as last_name, company,email FROM jobs LEFT JOIN hrs ON jobs.hr_id = hrs.id WHERE jobs.id= %(job_id)s;"
         results = connectToMySQL(cls.db_name).query_db(query, data)
         if results:
             return results[0]
